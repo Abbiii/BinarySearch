@@ -1,4 +1,3 @@
-
 private Item[] store = {new Item(184,14),
         new Item(196,60),
         new Item(206,31),
@@ -22,18 +21,40 @@ private Item[] store = {new Item(184,14),
 };                             
 public int linearSearch(int catNumToFind)
 {
-    //complete this method
+    for(int i=0; i<store.length; i++)
+    {
+        if(store[i].getCatNum() == catNumToFind){
+            return store[i].getInventory();
+        }
+    }
     return -1;
 }
 public int binarySearch(int catNumToFind)
 {
-    //complete this method    
-    return -1;    
+    int low=0;
+    int high=store.length-1;
+    while(low<=high)
+    {
+       int wat = (high+low)/2;
+        if(catNumToFind == store[wat].getCatNum())
+            return store[wat].getInventory();
+        else if(catNumToFind < store[wat].getCatNum())
+            high=wat-1;
+        else if(catNumToFind > store[wat].getCatNum())
+            low=wat+1;
+    }
+    return -1;  
 }
 public int binarySearch(int catNumToFind,int nLow, int nHigh)
 {
-    //complete this method    
-    return -1;           
+    if(nLow>nHigh)
+        return -1;
+    int wat = (nLow+nHigh)/2;
+    if(store[wat].getCatNum() == catNumToFind)
+        return store[wat].getInventory();
+    else if(store[wat].getCatNum() > catNumToFind)
+        return binarySearch(catNumToFind, nLow, wat-1);
+    else return binarySearch(catNumToFind, wat+1, nHigh);
 }
 public void setup()
 {
@@ -78,8 +99,3 @@ public void draw()
 {
     //empty!
 }
-
-
-
-
-
